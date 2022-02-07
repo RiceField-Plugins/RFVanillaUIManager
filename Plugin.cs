@@ -1,5 +1,5 @@
 ﻿using System;
-using RFVanillaUIDisabler.EventListeners;
+using RFVanillaUIManager.EventListeners;
 using Rocket.API;
 using Rocket.API.Collections;
 using Rocket.Core.Plugins;
@@ -8,7 +8,7 @@ using Rocket.Unturned.Player;
 using SDG.Unturned;
 using Logger = Rocket.Core.Logging.Logger;
 
-namespace RFVanillaUIDisabler
+namespace RFVanillaUIManager
 {
     public class Plugin : RocketPlugin<Configuration>
     {
@@ -46,7 +46,7 @@ namespace RFVanillaUIDisabler
         }
         public override TranslationList DefaultTranslations => new TranslationList
         {
-            {"example_translation1", "[RFVanillaUIDisabler] Example Translation 1"},
+            {"example_translation1", "[RFVanillaUIManager] Example Translation 1"},
         };
 
         private void EnableVanillaUI()
@@ -57,27 +57,27 @@ namespace RFVanillaUIDisabler
                 {
                     var player = UnturnedPlayer.FromSteamPlayer(steamPlayer);
                     if (!player.HasPermission(Conf.Permission)) continue;
-                    if (Conf.DisableFood)
+                    if (Conf.HideFoodBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowFood);
-                    if (Conf.DisableHealth)
+                    if (Conf.HideHealthBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowHealth);
-                    if (Conf.DisableOxygen)
+                    if (Conf.HideOxygenBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowOxygen);
-                    if (Conf.DisableStamina)
+                    if (Conf.HideStaminaBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowStamina);
-                    if (Conf.DisableVirus)
+                    if (Conf.HideVirusBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowVirus);
-                    if (Conf.DisableWater)
+                    if (Conf.HideWaterBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowWater);
-                    if (Conf.DisableDeathMenu)
+                    if (Conf.HideDeathMenu)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowDeathMenu);
-                    if (Conf.DisableGunStatus)
+                    if (Conf.HideGunStatus)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowUseableGunStatus);
-                    if (Conf.DisableStatusIcon)
+                    if (Conf.HideStatusIcon)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowStatusIcons);
-                    if (Conf.DisableVehicleStatus)
+                    if (Conf.HideVehicleStatus)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowVehicleStatus);
-                    if (Conf.DisableInteractWithEnemy)
+                    if (Conf.HideInteractWithEnemy)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowInteractWithEnemy);
                 }
             }

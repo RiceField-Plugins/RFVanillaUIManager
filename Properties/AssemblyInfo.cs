@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RFVanillaUIDisabler")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("RFVanillaUIManager")]
+[assembly: AssemblyDescription("RiceField Plugins")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RFVanillaUIDisabler")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("RiceField Plugins")]
+[assembly: AssemblyProduct("RFVanillaUIManager")]
+[assembly: AssemblyCopyright("Copyright © RiceField Plugins 2021")]
+[assembly: AssemblyTrademark("RiceField Plugins")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
