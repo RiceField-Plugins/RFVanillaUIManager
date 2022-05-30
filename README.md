@@ -1,2 +1,2 @@
-# RFVanillaUIDisabler
- An Unturned RocketMod / LDM plugin for disabling any Unturned vanilla UI
+# RFVanillaUIManager
+ An Unturned RocketMod / LDM plugin for managing any Unturned vanilla UI
