@@ -6,7 +6,6 @@ namespace RFVanillaUIManager
     {
         public bool Enabled;
         public bool RevertOnUnload;
-        public string Permission;
         public bool HideFoodBar;
         public bool HideHealthBar;
         public bool HideOxygenBar;
@@ -23,7 +22,6 @@ namespace RFVanillaUIManager
         {
             Enabled = true;
             RevertOnUnload = true;
-            Permission = "ui_disable";
             HideFoodBar = true;
             HideHealthBar = true;
             HideOxygenBar = true;

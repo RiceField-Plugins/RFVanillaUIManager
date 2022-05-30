@@ -62,6 +62,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Commands\ApplyUICommand.cs" />
         <Compile Include="Configuration.cs" />
         <Compile Include="EventListeners\PlayerEvent.cs" />
         <Compile Include="Plugin.cs" />

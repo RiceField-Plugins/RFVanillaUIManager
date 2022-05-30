@@ -1,7 +1,6 @@
 ﻿using System;
 using RFVanillaUIManager.EventListeners;
 using Rocket.API;
-using Rocket.API.Collections;
 using Rocket.Core.Plugins;
 using Rocket.Unturned;
 using Rocket.Unturned.Player;
@@ -12,6 +11,10 @@ namespace RFVanillaUIManager
 {
     public class Plugin : RocketPlugin<Configuration>
     {
+        private static int Major = 1;
+        private static int Minor = 0;
+        private static int Patch = 1;
+        
         public static Plugin Inst;
         public static Configuration Conf;
 
@@ -19,35 +22,36 @@ namespace RFVanillaUIManager
         {
             Inst = this;
             Conf = Configuration.Instance;
-            if (!Configuration.Instance.Enabled)
+            if (Conf.Enabled)
             {
-                Logger.LogWarning($"[{Name}] Plugin: DISABLED");
-                Unload();
-                return;
+                    U.Events.OnPlayerConnected += PlayerEvent.OnConnected;
+                
+                if (Level.isLoaded)
+                    foreach (var steamPlayer in Provider.clients)
+                        PlayerEvent.OnConnected(UnturnedPlayer.FromSteamPlayer(steamPlayer));
             }
+            else
+                Logger.LogWarning($"[{Name}] Plugin: DISABLED");
 
-            U.Events.OnPlayerConnected += PlayerEvent.OnConnected;
-            
             Logger.LogWarning($"[{Name}] Plugin loaded successfully!");
-            Logger.LogWarning($"[{Name}] {Name} v1.0.0");
+            Logger.LogWarning($"[{Name}] {Name} v{Major}.{Minor}.{Patch}");
             Logger.LogWarning($"[{Name}] Made with 'rice' by RiceField Plugins!");
         }
         protected override void Unload()
         {
-            if (Conf.RevertOnUnload)
-                EnableVanillaUI();
+            if (Conf.Enabled)
+            {
+                    U.Events.OnPlayerConnected -= PlayerEvent.OnConnected;
+                
+                if (Conf.RevertOnUnload)
+                    EnableVanillaUI();
+            }
             
             Inst = null;
             Conf = null;
             
-            U.Events.OnPlayerConnected -= PlayerEvent.OnConnected;
-
             Logger.LogWarning($"[{Name}] Plugin unloaded successfully!");
         }
-        public override TranslationList DefaultTranslations => new TranslationList
-        {
-            {"example_translation1", "[RFVanillaUIManager] Example Translation 1"},
-        };
 
         private void EnableVanillaUI()
         {
@@ -56,29 +60,40 @@ namespace RFVanillaUIManager
                 foreach (var steamPlayer in Provider.clients)
                 {
                     var player = UnturnedPlayer.FromSteamPlayer(steamPlayer);
-                    if (!player.HasPermission(Conf.Permission)) continue;
+                    
                     if (Conf.HideFoodBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowFood);
+                    
                     if (Conf.HideHealthBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowHealth);
+                    
                     if (Conf.HideOxygenBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowOxygen);
+                    
                     if (Conf.HideStaminaBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowStamina);
+                    
                     if (Conf.HideVirusBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowVirus);
+                    
                     if (Conf.HideWaterBar)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowWater);
+                    
                     if (Conf.HideDeathMenu)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowDeathMenu);
+                    
                     if (Conf.HideGunStatus)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowUseableGunStatus);
+                    
                     if (Conf.HideStatusIcon)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowStatusIcons);
+                    
                     if (Conf.HideVehicleStatus)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowVehicleStatus);
+                    
                     if (Conf.HideInteractWithEnemy)
                         player.Player.enablePluginWidgetFlag(EPluginWidgetFlags.ShowInteractWithEnemy);
+                    
                 }
             }
             catch (Exception e)
